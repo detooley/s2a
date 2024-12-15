@@ -1,0 +1,23 @@
+<html>
+    <p>
+    {{ range . }}
+        {{ .Status.UsRegistrationNumber }},
+    {{ end }}
+    </p>
+    {{ range . }}
+        <p>
+        {{ .Status.MarkElement }},
+        Reg. No. 
+        {{ .Status.UsRegistrationNumber }},
+        for
+        {{ $e := len .GsList }}
+        {{ $u := $e | dec | dec }}
+        {{ $p := $u | dec }}
+        {{ range $i, $e := .GsList }}
+            "{{ .Description }}"
+            in class 
+            {{ slz .PrimeClassCode }}{{ if and (eq $u 0) (eq $i 0) }} and{{ else if eq $i $u }}, and{{ else if le $i $p }},{{ else }}.{{ end }}
+        {{ end }}
+        </p>
+    {{ end }}
+</html>
