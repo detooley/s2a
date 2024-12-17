@@ -1,25 +1,25 @@
 package tsdrstruct
 
 // Define the structure of the JSON file
-type file struct {
-	TransactionList []transactionList `json:"transactionList"`
+type File struct {
+	TransactionList []TransactionList `json:"transactionList"`
 	Oversized       bool              `json:"oversized"`
 	Size            int               `json:"size"`
 }
-type transactionList struct {
-	Trademarks []trademarks `json:"trademarks"`
+type TransactionList struct {
+	Trademarks []Trademarks `json:"trademarks"`
 	SearchId   string       `json:"searchId"`
 }
-type trademarks struct {
-	Status status   `json:"status"`
-	GsList []gsList `json:"gsList"`
+type Trademarks struct {
+	Status Status   `json:"status"`
+	GsList []GsList `json:"gsList"`
 }
-type status struct {
+type Status struct {
 	SerialNumber         int    `json:"serialNumber"`
 	UsRegistrationNumber string `json:"usRegistrationNumber"`
 	MarkElement          string `json:"markElement"`
 }
-type gsList struct {
+type GsList struct {
 	Description    string `json:"description"`
 	PrimeClassCode string `json:"primeClassCode"`
 }

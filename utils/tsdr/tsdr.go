@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"regexp"
 	"strings"
+	"tsdr/tsdrstruct"
 )
 
 // TSDR UTILITIES
@@ -43,9 +44,9 @@ func query(sns string) string {
 }
 
 // Unmarshall the JSON file
-func extract(jsonData string) file {
+func extract(jsonData string) tsdrstruct.File {
 	//var data map[string]interface{}
-	var fileInfo file
+	var fileInfo tsdrstruct.File
 	err := json.Unmarshal([]byte(jsonData), &fileInfo)
 	if err != nil {
 		fmt.Printf("could not unmarshal json: %s\n", err)
@@ -65,7 +66,7 @@ func parseInput(sns string) []string {
 }
 
 // Retrieve file from API and return Go variable
-func GetFile(sns string) trademarks {
+func GetFile(sns string) tsdrstruct.Trademarks {
 	// Query the database
 	jsonData := query(sns)
 	// Extract JSON to a structure

@@ -1,3 +1,3 @@
-module github.com/detooley/s2a/utils/tsdr
+module tsdr
 
 go 1.23.2
