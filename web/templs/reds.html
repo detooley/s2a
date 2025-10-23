@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>Reds</title>
+        <link rel="stylesheet" type="text/css" href="/css/stylesheet.css"></link>
+    </head>
+    <body>
+        <div>
+            <table>
+                <tr>
+                    <th>serial number</th>
+                    <th>literal element</th>
+                    <th>country</th>
+                    <th>examiner</th>
+                </tr>
+            {{ range . }}
+                <tr>
+                    <td>{{ .Status.SerialNumber }}</td>
+                    <td>{{ .Status.MarkElement }}</td>
+                    <td>
+                        {{ range .Parties.OwnerGroups.Ten }}
+                            {{ .Citizenship.StateCountry.Name }}
+                        {{ end }}
+                    </td>
+                    <td>{{ .Status.Staff.Examiner.Name }}</td>
+                </tr>
+            {{ end }}
+            </table>
+        </div>
+    </body>
+</html>

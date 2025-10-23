@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Cites</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/stylesheet.css"></link>
+    </head>
+    <body>
+        <div class="header">
+            <div>S2A MULTIPLE CITE GENERATOR</div>
+        </div>
+        <div class="search-container">
+            <form action="cites" class="search-form" method="get">
+                <input type="text" class="search-input" name="sns" placeholder="enter serial numbers of cites"/>
+                <input type="submit" class="search-button" value="compile"/>
+            </form>
+        </div>
+        <div>
+            <p>
+            Registration of the applied-for mark is refused because of a likelihood of confusion with the marks in U.S. Registration Nos.
+            {{ $e := len . }}
+            {{ $u := $e | dec | dec }}
+            {{ $p := $u | dec }}
+            {{ range $i, $e := . }}
+                {{ .Status.UsRegistrationNumber }}{{ if and (eq $u 0) (eq $i 0) }} and{{ else if eq $i $u }}, and{{ else if le $i $p }},{{ else }}.{{ end }}
+            {{ end }}
+            </p>
+            {{ range . }}
+                <p>
+                {{ .Status.MarkElement }},
+                Reg. No. 
+                {{ .Status.UsRegistrationNumber }},
+                for
+                {{ $e := len .GsList }}
+                {{ $u := $e | dec | dec }}
+                {{ $p := $u | dec }}
+                {{ range $i, $e := .GsList }}
+                    "{{ brc .Description }}"
+                    in class 
+                    {{ slz .PrimeClassCode }}{{ if and (eq $u 0) (eq $i 0) }} and{{ else if eq $i $u }}, and{{ else if le $i $p }},{{ else }}.{{ end }}
+                {{ end }}
+            </p>
+        {{ end }}
+        </div>
+    </body>
+</html>

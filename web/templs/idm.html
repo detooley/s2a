@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>IDM</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/stylesheet.css"></link>
+    </head>
+    <body>
+        <div class="header">
+            <div>S2A IDENTIFICATION MANUAL</div>
+        </div>
+        <div class="search-container">
+            <form action="idm" class="search-form" method="get">
+                <input type="text" class="search-input" name="search" placeholder="search by keyword or class" autofocus />
+                <input type="submit" class="search-button" value="search"/>
+            </form>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="idm">ID</th>
+                        <th class="idm">CL</th>
+                        <th class="description">DESCRIPTION</th>
+                        <th class="idm">TM5</th>
+                        <th class="idm">NOTES</th>
+                    </tr>
+                </thead>
+            {{ range . }}
+                <tbody>
+                    <tr>
+                        <td class="id">{{ .IdTx }}</td>
+                        <td class="idm">{{ .ClassId }}</td>
+                        <td class={{ if eq .Status "D" }}"delete"{{ else }}"description"{{ end }}>{{ .DescriptionTx }}</td>
+                        <td class="status">{{ if eq .Tm5 "Y" }}Y{{ end }}</td>
+                        <td class="status">{{ if eq .Notes "" }}<a href='#{{ .IdTx }}'>[info]</a>{{ else }}<a class="darker" href='#{{ .IdTx }}'>[note]</a>{{ end }}</td>
+                    </tr>
+                </tbody>
+                <div class='modal' id='{{ .IdTx }}'>
+                    <div class='box'>
+                        <a class='close' href='#'>[X]</a>
+                        <p class='modtitle'>{{ .DescriptionTx }}</p>
+                        <div class='content'>Class:
+                            <span class='detail'>{{ .ClassId }}</span>Status:
+                            <span class='detail'>{{ .Status }}</span>Date:
+                            <span class='detail'>{{ .Version }}</span>TM5:
+                            <span class='detail'>{{ .Tm5 }}</span>
+                            <p><span class='detail'>{{ .Notes }}</span></p>
+                        </div>
+                    </div>
+                </div>
+            {{ end }}
+            </table>
+        </div>
+    </body>
+</html> 

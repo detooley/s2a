@@ -1,0 +1,212 @@
+/* Branding Style */
+
+body {
+    padding: 30px;
+    font-size: 14px;
+    color: #444;
+    background-color: #FFF;
+}
+
+div {
+    font-family: 'Inter', sans-serif;
+}
+
+.header {
+    color: #000;
+    font-size: 110%;
+    font-family: 'Inter', sans-serif;
+    text-align: right;
+    letter-spacing: 10px;
+    margin-bottom: 20px;
+}
+
+/* Links */
+
+a {
+    color:#aaa;
+    text-decoration:none;
+}
+
+a.darker {
+    color:#444;
+    text-decoration:none;
+}
+
+a:hover {
+    color:#000;
+}
+
+/* Search Bar */
+
+::placeholder {
+  color: #ccc;
+  opacity: 1; /* Ensures full opacity for placeholder text */
+}
+
+.search-container {
+  display: flex; /* Enables Flexbox for alignment */
+  align-items: center; /* Vertically centers items */
+  width: 100%; /* Or a specific fixed width for the container */
+  overflow: hidden; /* Ensures content stays within bounds */
+}
+
+.search-form {
+  display: flex; /* Enables Flexbox for alignment */
+  width: 100%; /* Makes the form take full width of the container */
+}
+
+.search-input {
+  flex-grow: 1; /* Allows the input field to grow and fill available space */
+  padding: 10px;
+  border: 1px solid #888;
+  outline: none; /* Removes default outline on focus */
+  font-size: 100%;
+}
+
+.search-button {
+  flex-shrink: 0; /* Prevents the button from shrinking */
+  width: 80px; /* Fixed width for the button */
+  padding: 10px;
+  margin-left: 10px;
+  background-color: #eee;
+  color: #404040;
+  border: 1px solid #888;
+  border-radius: 0 0 0 0;
+  cursor: pointer;
+  font-size: 90%;
+}
+
+.search-button:hover {
+  background-color: #ddd;
+}
+
+/* Default table style */
+
+table {
+    font-family: 'Inter', sans-serif;
+    font-size: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding-right: 30px;
+    padding-left: 10px;
+    text-align: left;
+}
+
+th {
+    padding-right: 30px;
+    padding-left: 10px;
+    text-align: left;
+    font-weight: normal;
+    letter-spacing: 5px;
+    color: #000;
+    font-size: 80%;
+}
+
+tr:not(:first-child):hover {
+    background-color: #FFFF9F;
+}
+
+/* IDM specific styles */
+
+.idm {
+    border-bottom: 1px solid #ddd;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.id {
+    border-bottom: 1px solid #ddd;
+    padding-top:10px;
+    padding-bottom:10px;
+    font-size: 95%;
+    white-space: nowrap;
+}
+
+.description {
+    width:100%;
+    border-bottom: 1px solid #ddd;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.delete {
+    width:100%;
+    border-bottom: 1px solid #ddd;
+    padding-top:10px;
+    padding-bottom:10px; 
+    text-decoration: line-through;
+}
+
+.status {
+    border-bottom: 1px solid #ddd;
+    padding-top:10px;
+    padding-bottom:10px; 
+    font-family:'Consolas', monospace;
+    text-align: center;  
+}
+
+.detail {
+    font-family:'Consolas', monospace;
+    color:#666;
+    padding-right:1.5em;
+}
+
+/* Modal */
+
+.modal .box {
+    width: -webkit-min-content;
+    width: -moz-min-content;
+    width: min-content;
+    min-width:100%;
+    margin:0;
+    padding:10px;
+    background-color:#FFF;
+    box-shadow:5px 10px 50px 10px #CCC;
+    outline:9999px solid rgba(0,0,0,0.2);
+}
+
+.modal .modtitle {
+    margin:0;
+    padding:20px;
+    border-bottom:1px #CCC solid;
+    font-family:'Inter', sans-serif;
+    font-size:120%;
+}
+
+.modal .content {
+    display:block;
+    padding:20px;
+    font-family:'Inter', sans-serif;
+    font-size:110%;
+    color:#444;
+    line-height:175%;
+}
+
+.modal .close {
+    float:right;
+    display:block;
+    padding:0;
+    text-decoration:none;
+    font-family: 'Consolas', monospace;
+    font-size:100%;
+}
+
+.modal {
+    /** Hide the modal */
+    display:none;
+    /** Modal styling */
+    position:fixed;
+    width:50%;
+    max-height:90%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+
+.modal:target {
+    /** Show lightbox */
+    display:block;
+    outline:none;
+}

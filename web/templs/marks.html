@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Marks</title>
+        <link rel="stylesheet" type="text/css" href="/css/stylesheet.css"></link>
+    </head>
+    <body>
+        <div>
+            <table>
+                <tr>
+                    <th>serial number</th>
+                    <th>literal element</th>
+                </tr>
+            {{ range . }}
+                <tr>
+                    <td>{{ .Status.SerialNumber }}</td>
+                    <td>{{ .Status.MarkElement}}</td>
+                </tr>
+            {{ end }}
+            </table>
+        </div>
+    </body>
+</html>

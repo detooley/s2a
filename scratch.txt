@@ -1,0 +1,28 @@
+backupTable := "CREATE TABLE pulls" +
+		string(time.Now().Format("20060102150405")) +
+		" AS SELECT * FROM pulls;"
+	dropTable := "DROP TABLE IF EXISTS pulls;"
+	newTable := "CREATE TABLE pulls(" +
+		"ser_no INT PRIMARY KEY," +
+		"mark VARCHAR(255)," +
+		"country VARCHAR(255)," +
+		"examiner VARCHAR(255)," +
+		"pull_date TIMESTAMP DEFAULT NOW());"
+
+	_, err = conn.Exec(backupTable)
+	if err != nil {
+		log.Fatalf("Error creating backup table: %v", err)
+	}
+	fmt.Println("Backup table created successfully.")
+
+	_, err = conn.Exec(dropTable)
+	if err != nil {
+		log.Fatalf("Error dropping old table: %v", err)
+	}
+	fmt.Println("Old Table dropped successfully.")
+
+	_, err = conn.Exec(newTable)
+	if err != nil {
+		log.Fatalf("Error creating new table: %v", err)
+	}
+	fmt.Println("New Table created successfully.")

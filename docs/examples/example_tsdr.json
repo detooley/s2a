@@ -1,0 +1,476 @@
+{
+    "transactionList" : [ {
+      "trademarks" : [ {
+        "status" : {
+          "staff" : {
+            "examiner" : null,
+            "paralegal" : null,
+            "ituParalegal" : null,
+            "lie" : null,
+            "chargeTo" : null
+          },
+          "correspondence" : {
+            "freeFormAddress" : [ ],
+            "address" : {
+              "line1" : "499 Moganshan Road, Xihu District",
+              "line2" : "5th Floor, Hua Li Jin Ding Yuan",
+              "city" : "Hangzhou, Zhejiang",
+              "region" : {
+                "isoRegion" : null,
+                "iso" : null,
+                "wipo" : null
+              },
+              "postalCode" : "310000",
+              "countryCode" : "CN",
+              "countryName" : "China"
+            },
+            "attorneyName" : "ZHEN LI",
+            "attorneyEmail" : {
+              "authIndicator" : "Y",
+              "addresses" : [ "ljwlf0812@163.com" ]
+            },
+            "individualFullName" : "ZHEN LI",
+            "correspondantEmail" : {
+              "authIndicator" : "Y",
+              "addresses" : [ "ljwlf0812@163.com" ]
+            }
+          },
+          "serialNumber" : 90123123,
+          "designSearchList" : [ {
+            "code" : "01.15.18",
+            "descriptions" : [ "More than one drop including teardrops or raindrops", "Raindrops (more than a single drop)", "Teardrops (more than a single drop)", "multiple drops (rain, tear, etc.)" ]
+          } ],
+          "filingDate" : "2020-08-19",
+          "usRegistrationNumber" : "6319547",
+          "usRegistrationDate" : "2021-04-13",
+          "filedAsTeasPlusApp" : true,
+          "currentlyAsTeasPlusApp" : true,
+          "filedAsTeasRfApp" : false,
+          "currentlyAsTeasRfApp" : false,
+          "supplementalRegister" : false,
+          "amendPrincipal" : false,
+          "amendSupplemental" : false,
+          "trademark" : true,
+          "certificationMark" : false,
+          "serviceMark" : false,
+          "collectiveMembershipMark" : false,
+          "collectiveServiceMark" : false,
+          "collectiveTradeMark" : false,
+          "status" : 700,
+          "statusDate" : "2021-04-13",
+          "standardChar" : false,
+          "markDrawingCd" : "3",
+          "colorDrawingCurr" : false,
+          "section2f" : false,
+          "section2fPartial" : false,
+          "others" : false,
+          "publishedPrevRegMark" : false,
+          "clsTotal" : 2,
+          "filedUse" : true,
+          "filedItu" : false,
+          "filed44d" : false,
+          "filed44e" : false,
+          "filed66a" : false,
+          "filedNoBasis" : false,
+          "useCurr" : true,
+          "ituCurr" : false,
+          "sect44dCurr" : false,
+          "sect44eCurr" : false,
+          "sect66aCurr" : false,
+          "noBasisCurr" : false,
+          "useAmended" : false,
+          "ituAmended" : false,
+          "sect44dAmended" : false,
+          "sect44eAmended" : false,
+          "attrnyDktNumber" : "349723",
+          "sect8Filed" : false,
+          "sect8Acpt" : false,
+          "sect8PartialAcpt" : false,
+          "sect15Filed" : false,
+          "sect15Ack" : false,
+          "sect71Filed" : false,
+          "sect71Acpt" : false,
+          "sect71PartialAcpt" : false,
+          "renewalFiled" : false,
+          "changeInReg" : false,
+          "lawOffAsgnCd" : "L40",
+          "currLocationCd" : "650",
+          "currLocationDt" : "2021-04-13",
+          "chargeToLocation" : null,
+          "phyLocation" : null,
+          "phyLocationDt" : null,
+          "extStatusDesc" : "Registered.  The registration date is used to determine when post-registration maintenance documents are due.",
+          "intStatusDesc" : null,
+          "markDrawDesc" : "AN ILLUSTRATION DRAWING WHICH INCLUDES WORD(S)/ LETTER(S) /NUMBER(S)",
+          "currentLoc" : "PUBLICATION AND ISSUE SECTION",
+          "correction" : "",
+          "descOfMark" : "The mark consists of the stylized word \"JORSSAR\" with two accent marks above and between the \"J\" and the \"O\".",
+          "markElement" : "JORSSAR",
+          "translation" : "The wording JORSSAR has no meaning in a foreign language.",
+          "parentOf" : [ ],
+          "prevRegNumList" : [ ],
+          "newLawOffAsgnCd" : "104",
+          "lawOffAssigned" : "LAW OFFICE 104",
+          "tm5Status" : 8,
+          "tm5StatusDesc" : "LIVE/REGISTRATION/Issued and Active",
+          "tm5StatusDef" : "The trademark application has been registered with the Office.",
+          "physicalLocationHistory" : [ {
+            "eventDate" : "2020-09-24",
+            "physicalLocation" : "MADCD",
+            "physicalLocationDescription" : "NO PHYSICAL FILE"
+          }, {
+            "eventDate" : "2020-08-22",
+            "physicalLocation" : "OUT",
+            "physicalLocationDescription" : "NO PHYSICAL FILE"
+          } ],
+          "pseudoMark" : null
+        },
+        "parties" : {
+          "ownerGroups" : {
+            "30" : [ {
+              "serialNumber" : 90123123,
+              "partyType" : 30,
+              "partyTypeDescription" : "ORIGINAL REGISTRANT",
+              "reelFrame" : null,
+              "entityNum" : 1,
+              "entityType" : {
+                "code" : 16,
+                "description" : "LIMITED LIABILITY COMPANY"
+              },
+              "name" : "Shenzhen Yifan Electronic Commerce Co., Ltd.",
+              "emailList" : {
+                "authIndicator" : "Y",
+                "addresses" : [ "XXXX" ]
+              },
+              "composedOf" : null,
+              "dbaAkaFormerly" : null,
+              "assignment" : null,
+              "address1" : "308,bldg 17,Dahuanggong Industrial Zone",
+              "address2" : "72-94 Gezhen East Rd,Longgang District",
+              "city" : "Shenzhen",
+              "addressStateCountry" : {
+                "stateCountry" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                },
+                "isoRegion" : null,
+                "iso" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                },
+                "wipo" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                }
+              },
+              "zip" : "518000",
+              "citizenship" : {
+                "stateCountry" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                },
+                "isoRegion" : null,
+                "iso" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                },
+                "wipo" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                }
+              }
+            } ],
+            "20" : [ {
+              "serialNumber" : 90123123,
+              "partyType" : 20,
+              "partyTypeDescription" : "OWNER AT PUBLICATION",
+              "reelFrame" : null,
+              "entityNum" : 1,
+              "entityType" : {
+                "code" : 16,
+                "description" : "LIMITED LIABILITY COMPANY"
+              },
+              "name" : "Shenzhen Yifan Electronic Commerce Co., Ltd.",
+              "emailList" : {
+                "authIndicator" : "Y",
+                "addresses" : [ "XXXX" ]
+              },
+              "composedOf" : null,
+              "dbaAkaFormerly" : null,
+              "assignment" : null,
+              "address1" : "308,bldg 17,Dahuanggong Industrial Zone",
+              "address2" : "72-94 Gezhen East Rd,Longgang District",
+              "city" : "Shenzhen",
+              "addressStateCountry" : {
+                "stateCountry" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                },
+                "isoRegion" : null,
+                "iso" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                },
+                "wipo" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                }
+              },
+              "zip" : "518000",
+              "citizenship" : {
+                "stateCountry" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                },
+                "isoRegion" : null,
+                "iso" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                },
+                "wipo" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                }
+              }
+            } ],
+            "10" : [ {
+              "serialNumber" : 90123123,
+              "partyType" : 10,
+              "partyTypeDescription" : "ORIGINAL APPLICANT",
+              "reelFrame" : null,
+              "entityNum" : 1,
+              "entityType" : {
+                "code" : 16,
+                "description" : "LIMITED LIABILITY COMPANY"
+              },
+              "name" : "Shenzhen Yifan Electronic Commerce Co., Ltd.",
+              "emailList" : {
+                "authIndicator" : "Y",
+                "addresses" : [ "XXXX" ]
+              },
+              "composedOf" : null,
+              "dbaAkaFormerly" : null,
+              "assignment" : null,
+              "address1" : "308,bldg 17,Dahuanggong Industrial Zone",
+              "address2" : "72-94 Gezhen East Rd,Longgang District",
+              "city" : "Shenzhen",
+              "addressStateCountry" : {
+                "stateCountry" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                },
+                "isoRegion" : null,
+                "iso" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                },
+                "wipo" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                }
+              },
+              "zip" : "518000",
+              "citizenship" : {
+                "stateCountry" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                },
+                "isoRegion" : null,
+                "iso" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                },
+                "wipo" : {
+                  "code" : "CN",
+                  "name" : "CHINA"
+                }
+              }
+            } ]
+          }
+        },
+        "gsList" : [ {
+          "serialNumber" : 90123123,
+          "internationalClassPrime" : true,
+          "usClasses" : [ {
+            "code" : "022",
+            "description" : "Games, Toys, and Sporting Goods"
+          }, {
+            "code" : "039",
+            "description" : "Clothing"
+          } ],
+          "internationalClasses" : [ {
+            "code" : "025",
+            "description" : "Clothing"
+          } ],
+          "pseudoClasses" : [ ],
+          "statusCode" : "6",
+          "statusDescription" : "ACTIVE",
+          "statusDate" : "2020-09-21",
+          "firstUseDate" : 20200801,
+          "firstUseInCommerceDate" : 20200801,
+          "firstUseDateDescription" : null,
+          "firstUseInCommerceDateDescription" : null,
+          "description" : "Coats; Dresses; Leotards; Nightgowns; Pajamas; Pants; Shirts; Sweatshirts; Tee-shirts; Waistcoats; Jackets; Knitwear, namely, shirts, dresses, sweaters; Short sets",
+          "classBasis" : null,
+          "primeClassCode" : "025"
+        } ],
+        "foreignInfoList" : [ ],
+        "prosecutionHistory" : [ {
+          "entryNumber" : 20,
+          "entryCode" : "EWAF",
+          "entryType" : "I",
+          "proceedingNum" : 0,
+          "entryDate" : "2023-09-11T04:00:00.000+0000",
+          "entryDesc" : "TEAS WITHDRAWAL OF ATTORNEY RECEIVED-FIRM RETAINS"
+        }, {
+          "entryNumber" : 19,
+          "entryCode" : "TCCA",
+          "entryType" : "I",
+          "proceedingNum" : 0,
+          "entryDate" : "2023-09-11T04:00:00.000+0000",
+          "entryDesc" : "TEAS CHANGE OF CORRESPONDENCE RECEIVED"
+        }, {
+          "entryNumber" : 18,
+          "entryCode" : "ARAA",
+          "entryType" : "I",
+          "proceedingNum" : 0,
+          "entryDate" : "2023-09-11T04:00:00.000+0000",
+          "entryDesc" : "ATTORNEY/DOM.REP.REVOKED AND/OR APPOINTED"
+        }, {
+          "entryNumber" : 17,
+          "entryCode" : "REAP",
+          "entryType" : "I",
+          "proceedingNum" : 0,
+          "entryDate" : "2023-09-11T04:00:00.000+0000",
+          "entryDesc" : "TEAS REVOKE/APP/CHANGE ADDR OF ATTY/DOM REP RECEIVED"
+        }, {
+          "entryNumber" : 16,
+          "entryCode" : "R.PR",
+          "entryType" : "A",
+          "proceedingNum" : 0,
+          "entryDate" : "2021-04-13T04:00:00.000+0000",
+          "entryDesc" : "REGISTERED-PRINCIPAL REGISTER"
+        }, {
+          "entryNumber" : 15,
+          "entryCode" : "NPUB",
+          "entryType" : "E",
+          "proceedingNum" : 0,
+          "entryDate" : "2021-01-26T05:00:00.000+0000",
+          "entryDesc" : "OFFICIAL GAZETTE PUBLICATION CONFIRMATION E-MAILED"
+        }, {
+          "entryNumber" : 14,
+          "entryCode" : "PUBO",
+          "entryType" : "A",
+          "proceedingNum" : 0,
+          "entryDate" : "2021-01-26T05:00:00.000+0000",
+          "entryDesc" : "PUBLISHED FOR OPPOSITION"
+        }, {
+          "entryNumber" : 13,
+          "entryCode" : "NONP",
+          "entryType" : "E",
+          "proceedingNum" : 0,
+          "entryDate" : "2021-01-06T05:00:00.000+0000",
+          "entryDesc" : "NOTIFICATION OF NOTICE OF PUBLICATION E-MAILED"
+        }, {
+          "entryNumber" : 12,
+          "entryCode" : "CNSA",
+          "entryType" : "O",
+          "proceedingNum" : 0,
+          "entryDate" : "2020-12-21T05:00:00.000+0000",
+          "entryDesc" : "APPROVED FOR PUB - PRINCIPAL REGISTER"
+        }, {
+          "entryNumber" : 11,
+          "entryCode" : "XAEC",
+          "entryType" : "I",
+          "proceedingNum" : 0,
+          "entryDate" : "2020-12-21T05:00:00.000+0000",
+          "entryDesc" : "EXAMINER'S AMENDMENT ENTERED"
+        }, {
+          "entryNumber" : 10,
+          "entryCode" : "GNEN",
+          "entryType" : "O",
+          "proceedingNum" : 0,
+          "entryDate" : "2020-12-21T05:00:00.000+0000",
+          "entryDesc" : "NOTIFICATION OF EXAMINERS AMENDMENT E-MAILED"
+        }, {
+          "entryNumber" : 9,
+          "entryCode" : "GNEA",
+          "entryType" : "F",
+          "proceedingNum" : 0,
+          "entryDate" : "2020-12-21T05:00:00.000+0000",
+          "entryDesc" : "EXAMINERS AMENDMENT E-MAILED"
+        }, {
+          "entryNumber" : 8,
+          "entryCode" : "CNEA",
+          "entryType" : "R",
+          "proceedingNum" : 0,
+          "entryDate" : "2020-12-21T05:00:00.000+0000",
+          "entryDesc" : "EXAMINERS AMENDMENT -WRITTEN"
+        }, {
+          "entryNumber" : 7,
+          "entryCode" : "DOCK",
+          "entryType" : "D",
+          "proceedingNum" : 0,
+          "entryDate" : "2020-12-16T05:00:00.000+0000",
+          "entryDesc" : "ASSIGNED TO EXAMINER"
+        }, {
+          "entryNumber" : 6,
+          "entryCode" : "TCCA",
+          "entryType" : "I",
+          "proceedingNum" : 0,
+          "entryDate" : "2020-12-15T05:00:00.000+0000",
+          "entryDesc" : "TEAS CHANGE OF CORRESPONDENCE RECEIVED"
+        }, {
+          "entryNumber" : 5,
+          "entryCode" : "ARAA",
+          "entryType" : "I",
+          "proceedingNum" : 0,
+          "entryDate" : "2020-12-15T05:00:00.000+0000",
+          "entryDesc" : "ATTORNEY/DOM.REP.REVOKED AND/OR APPOINTED"
+        }, {
+          "entryNumber" : 4,
+          "entryCode" : "REAP",
+          "entryType" : "I",
+          "proceedingNum" : 0,
+          "entryDate" : "2020-12-15T05:00:00.000+0000",
+          "entryDesc" : "TEAS REVOKE/APP/CHANGE ADDR OF ATTY/DOM REP RECEIVED"
+        }, {
+          "entryNumber" : 3,
+          "entryCode" : "MDSC",
+          "entryType" : "E",
+          "proceedingNum" : 0,
+          "entryDate" : "2020-09-22T04:00:00.000+0000",
+          "entryDesc" : "NOTICE OF DESIGN SEARCH CODE E-MAILED"
+        }, {
+          "entryNumber" : 2,
+          "entryCode" : "NWOS",
+          "entryType" : "I",
+          "proceedingNum" : 0,
+          "entryDate" : "2020-09-21T04:00:00.000+0000",
+          "entryDesc" : "NEW APPLICATION OFFICE SUPPLIED DATA ENTERED"
+        }, {
+          "entryNumber" : 1,
+          "entryCode" : "NWAP",
+          "entryType" : "I",
+          "proceedingNum" : 0,
+          "entryDate" : "2020-08-22T04:00:00.000+0000",
+          "entryDesc" : "NEW APPLICATION ENTERED"
+        } ],
+        "relationshipBundleList" : [ ],
+        "internationalData" : false,
+        "publication" : {
+          "serialNumber" : 90123123,
+          "datePublished" : "2021-01-26",
+          "officialGazettes" : [ ]
+        },
+        "divisional" : {
+          "serialNumber" : 90123123,
+          "childOf" : null,
+          "parentOfList" : [ ]
+        }
+      } ],
+      "searchId" : "90123123"
+    } ],
+    "oversized" : false,
+    "size" : 1
+  }
