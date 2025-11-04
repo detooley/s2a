@@ -11,6 +11,7 @@ import (
 
 	_ "github.com/lib/pq"
 	"s2a.app/idm"
+	"s2a.app/utils/structs"
 	"s2a.app/utils/text"
 )
 
@@ -82,15 +83,19 @@ func CreateIdManual() {
 }
 
 // Search the id manual table
-func SearchIdManual(search string) []IdManual {
-	var results []IdManual
-	if search == "" {
+func SearchIdManual(idm structs.IdmPageData) []structs.IdManual {
+	var results []structs.IdManual
+	if idm.Search == "" {
 		return results
 	}
 	conn := connectToDatabase()
 	defer conn.Close()
 	// create SQL commands
-	sql := generateIdmQuery(search)
+	sqlStart := "SELECT " + idManualFields + " FROM id_manual WHERE "
+	sqlSearch := parseIdmSearch(idm.Search)
+	sqlSort := parseOrderBy(idm.OrderBy)
+	sql := sqlStart + sqlSearch + sqlSort
+	fmt.Print(sql + "\n")
 	// execute sequential SQL commands
 	rows, err := conn.Query(sql)
 	if err != nil {
@@ -108,13 +113,32 @@ func SearchIdManual(search string) []IdManual {
 		var begin_effective_date time.Time
 		var status string
 
-		err := rows.Scan(&id, &id_tx, &class_id, &description_tx, &notes, &version, &tm5, &begin_effective_date, &status)
+		err := rows.Scan(&id,
+			&id_tx,
+			&class_id,
+			&description_tx,
+			&notes,
+			&version,
+			&tm5,
+			&begin_effective_date,
+			&status,
+		)
+
 		if err != nil {
 			fmt.Printf("Error scanning row: %s\n", err)
 			continue
 		}
-		results = append(results, IdManual{id, id_tx, class_id, description_tx, notes, version, tm5, begin_effective_date, status})
-		//fmt.Printf("%d %s %s %s %s %s %s %s %s\n", id, id_tx, class_id, description_tx, notes, version, tm5, begin_effective_date.Format(time.RFC3339), status)
+		results = append(results, structs.IdManual{
+			Id:                 id,
+			IdTx:               id_tx,
+			ClassId:            class_id,
+			DescriptionTx:      description_tx,
+			Notes:              notes,
+			Version:            version,
+			Tm5:                tm5,
+			BeginEffectiveDate: begin_effective_date,
+			Status:             status,
+		})
 	}
 	return results
 }
@@ -220,7 +244,9 @@ func populateIdManual(conn *sql.DB) {
 			status := (results["docs"].(map[string]any)[strconv.Itoa(i)].(map[string]any)["status"])
 			// build the SQL statement
 			populateIds := fmt.Sprintf("INSERT INTO id_manual (id, id_tx, class_id, description_tx, notes, version, tm5, begin_effective_date, status) "+
-				"VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');", id, id_tx, class_id, description_tx, notes, version, tm5, begin_effective_date, status)
+				"VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+				id, id_tx, class_id, description_tx, notes, version, tm5, begin_effective_date, status,
+			)
 			// fmt.Print(description_tx)
 			// insert the entries and handle errors
 			_, err := conn.Exec(populateIds)
@@ -288,50 +314,29 @@ func parseIdmSearch(search string) string {
 			}
 			sql_search += sql_bit + " AND "
 		}
-
 	}
 	sql_search = strings.TrimSuffix(sql_search, " AND ")
-	fmt.Print(sql_search)
+	//fmt.Print(sql_search)
 	return sql_search
 }
 
-func generateIdmQuery(search string) string {
-	sql_start := "SELECT " + idManualFields + " FROM id_manual WHERE "
-	sql_search := parseIdmSearch(search)
-	sql_sort := " ORDER BY class_id;"
-	sql := sql_start + sql_search + sql_sort
+func parseOrderBy(orderBy structs.OrderBy) string {
+	var sql string
+	var dir string
+	if orderBy.Direction == "desc" {
+		dir = "DESC"
+	} else {
+		dir = "ASC"
+	}
+	switch orderBy.Element {
+	case "class_id", "version", "tm5", "begin_effective_date", "status":
+		sql = " ORDER BY " + orderBy.Element + " " + dir + ", description_tx " + dir + ";"
+	case "description_tx":
+		sql = " ORDER BY description_tx " + dir + ";"
+	default:
+		sql = " ORDER BY class_id " + dir + ", description_tx " + dir + ";"
+	}
 	return sql
-}
-
-// Define the structure of the Pulls Table
-type Pulls struct {
-	SerNo    int       `db:"ser_no"`
-	Mark     string    `db:"mark"`
-	Country  string    `db:"country"`
-	Examiner string    `db:"examiner"`
-	PullDate time.Time `db:"pull_date"`
-}
-
-// Define the structure of the Id Manual Table
-type IdManual struct {
-	Id                 int       `db:"id"`
-	IdTx               string    `db:"id_tx"`
-	ClassId            string    `db:"class_id"`
-	DescriptionTx      string    `db:"description_tx"`
-	Notes              string    `db:"notes"`
-	Version            string    `db:"version"`
-	Tm5                string    `db:"TM5"`
-	BeginEffectiveDate time.Time `db:"begin_effective_date"`
-	Status             string    `db:"status"`
-}
-
-// Define the structure of search results
-type SearchResults struct {
-	Search   string
-	OrderBy  string
-	NumFound int
-	Options  string
-	Results  []IdManual
 }
 
 // Define string with id_manual fields to pull

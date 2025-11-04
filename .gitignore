@@ -13,3 +13,8 @@
 /.wget-hsts
 /go
 nohup.out
+scratch.txt
+cron
+*.log
+*.out
+*.tmp

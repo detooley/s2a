@@ -8,6 +8,7 @@ import (
 
 	"s2a.app/db"
 	"s2a.app/tsdr"
+	"s2a.app/utils/structs"
 	"s2a.app/utils/text"
 )
 
@@ -90,9 +91,35 @@ func GetDb(w http.ResponseWriter, r *http.Request) {
 // Search Id Manual
 func GetIdm(w http.ResponseWriter, r *http.Request) {
 	fmt.Print("got /idm\n")
-	// Extract search term
-	search := r.URL.Query().Get("search")
-	entries := db.SearchIdManual(search)
+	var idm structs.IdmPageData
+	// Extract search elements
+	idm.Search = r.URL.Query().Get("search")
+	idm.OrderBy.Element = r.URL.Query().Get("orderby")
+	idm.OrderBy.Direction = r.URL.Query().Get("direction")
+	// Extract Options
+	options := r.URL.Query().Get("options")
+	idm.Options.Submitted = options
+	for _, option := range options {
+		if option == 105 {
+			idm.Options.ShowId = "on"
+		} // Unicode for 'i' is 105
+		if option == 115 {
+			idm.Options.ShowStatus = "on"
+		} // Unicode for 's' is 115
+		if option == 100 {
+			idm.Options.ShowDate = "on"
+		} // Unicode for 'd' is 100
+		if option == 118 {
+			idm.Options.ShowVer = "on"
+		} // Unicode for 'v' is 118
+		if option == 116 {
+			idm.Options.ShowTm5 = "on"
+		} // Unicode for 't' is 116
+	}
+	// Query database
+	results := db.SearchIdManual(idm)
+	//Add results to page data
+	idm.Results = results
 	// Set template directory variables
 	tmplDir := "web/templs/"
 	tmplExt := ".html"
@@ -102,7 +129,7 @@ func GetIdm(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	// Execute template
-	err = tmpl.Execute(w, entries)
+	err = tmpl.Execute(w, idm)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		//	panic(err)

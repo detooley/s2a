@@ -12,7 +12,8 @@
         </div>
         <div class="search-container">
             <form action="idm" class="search-form" method="get">
-                <input type="text" class="search-input" name="search" placeholder="search by keyword or class" autofocus />
+                <input type="text" class="search-input" name="search" placeholder="search by keyword or class" value ="{{ .Search }}" autofocus />
+                <input type="hidden" name="options" value ="{{ .Options.Submitted }}" />
                 <input type="submit" class="search-button" value="search"/>
             </form>
         </div>
@@ -20,30 +21,39 @@
             <table>
                 <thead>
                     <tr>
-                        <th class="idm">ID</th>
-                        <th class="idm">CL</th>
-                        <th class="description">DESCRIPTION</th>
-                        <th class="idm">TM5</th>
+                        {{ if .Options.ShowId }}<th class="idm">ID</th>{{ end  }}
+                        <th class="idm"><a href="?search={{ .Search }}&orderby=class_id&direction={{ if eq .OrderBy.Direction "desc" }}{{ else }}desc{{ end }}&options={{ .Options.Submitted }}">CL</a></th>
+                        <th class="description"><a href="?search={{ .Search }}&orderby=description_tx&direction={{ if eq .OrderBy.Direction "desc" }}{{ else }}desc{{ end }}&options={{ .Options.Submitted }}">DESCRIPTION</a></th>
+                        {{ if .Options.ShowTm5 }}<th class="idm"><a href="?search={{ .Search }}&orderby=tm5&direction={{ if eq .OrderBy.Direction "desc" }}{{ else }}desc{{ end }}&options={{ .Options.Submitted }}">TM5</a></th>{{ end }}
+                        {{ if .Options.ShowStatus }}<th class="idm"><a href="?search={{ .Search }}&orderby=status&direction={{ if eq .OrderBy.Direction "desc" }}{{ else }}desc{{ end }}&options={{ .Options.Submitted }}">ST</a></th>{{ end }}
+                        {{ if .Options.ShowDate }}<th class="ver"><a href="?search={{ .Search }}&orderby=begin_effective_date&direction={{ if eq .OrderBy.Direction "desc" }}{{ else }}desc{{ end }}&options={{ .Options.Submitted }}">DATE</a></th>{{ end }}
+                        {{ if .Options.ShowVer }}<th class="ver"><a href="?search={{ .Search }}&orderby=version&direction={{ if eq .OrderBy.Direction "desc" }}{{ else }}desc{{ end }}&options={{ .Options.Submitted }}">VER</a></th>{{ end }}
                         <th class="idm">NOTES</th>
                     </tr>
                 </thead>
-            {{ range . }}
+            {{ $Options := .Options }}
+            {{ range .Results }}
                 <tbody>
                     <tr>
-                        <td class="id">{{ .IdTx }}</td>
-                        <td class="idm">{{ .ClassId }}</td>
+                        {{ if $Options.ShowId }}<td class="id">{{ .IdTx }}</td>{{ end }}
+                        <td class="id">{{ .ClassId }}</td>
                         <td class={{ if eq .Status "D" }}"delete"{{ else }}"description"{{ end }}>{{ .DescriptionTx }}</td>
-                        <td class="status">{{ if eq .Tm5 "Y" }}Y{{ end }}</td>
+                        {{ if $Options.ShowTm5 }}<td class="status">{{ if eq .Tm5 "Y" }}Y{{ end }}</td>{{ end }}
+                        {{ if $Options.ShowStatus }}<td class="status">{{ .Status }}</td>{{ end }}
+                        {{ if $Options.ShowDate }}<td class="id">{{ printf "%02d" .BeginEffectiveDate.Month }}-{{ printf "%02d" .BeginEffectiveDate.Day }}-{{ .BeginEffectiveDate.Year }}</td>{{ end }}
+                        {{ if $Options.ShowVer }}<td class="id">{{ .Version }}</td>{{ end }}
                         <td class="status">{{ if eq .Notes "" }}<a href='#{{ .IdTx }}'>[info]</a>{{ else }}<a class="darker" href='#{{ .IdTx }}'>[note]</a>{{ end }}</td>
                     </tr>
-                </tbody>
+                </tbody> 
                 <div class='modal' id='{{ .IdTx }}'>
                     <div class='box'>
-                        <a class='close' href='#'>[X]</a>
+                        <a class='close' href='##'>[X]</a>
                         <p class='modtitle'>{{ .DescriptionTx }}</p>
-                        <div class='content'>Class:
+                        <div class='content'>ID:
+                            <span class='detail'>{{ .IdTx }}</span>Class:
                             <span class='detail'>{{ .ClassId }}</span>Status:
                             <span class='detail'>{{ .Status }}</span>Date:
+                            <span class='detail'>{{ printf "%02d" .BeginEffectiveDate.Month }}-{{ printf "%02d" .BeginEffectiveDate.Day }}-{{ .BeginEffectiveDate.Year }}</span>Version:
                             <span class='detail'>{{ .Version }}</span>TM5:
                             <span class='detail'>{{ .Tm5 }}</span>
                             <p><span class='detail'>{{ .Notes }}</span></p>

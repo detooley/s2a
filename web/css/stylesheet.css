@@ -13,7 +13,7 @@ div {
 
 .header {
     color: #000;
-    font-size: 110%;
+    font-size: 1.1em;
     font-family: 'Inter', sans-serif;
     text-align: right;
     letter-spacing: 10px;
@@ -34,6 +34,16 @@ a.darker {
 
 a:hover {
     color:#000;
+}
+
+thead a {
+    color:#000;
+    text-decoration:none;
+}
+
+thead a:hover {
+    color:#000;
+    background-color: #eee;
 }
 
 /* Search Bar */
@@ -60,7 +70,7 @@ a:hover {
   padding: 10px;
   border: 1px solid #888;
   outline: none; /* Removes default outline on focus */
-  font-size: 100%;
+  font-size: 1em;
 }
 
 .search-button {
@@ -73,7 +83,7 @@ a:hover {
   border: 1px solid #888;
   border-radius: 0 0 0 0;
   cursor: pointer;
-  font-size: 90%;
+  font-size: .9em;
 }
 
 .search-button:hover {
@@ -104,7 +114,7 @@ th {
     font-size: 80%;
 }
 
-tr:not(:first-child):hover {
+tbody tr:hover {
     background-color: #FFFF9F;
 }
 
@@ -116,11 +126,18 @@ tr:not(:first-child):hover {
     padding-bottom:10px;
 }
 
+.ver {
+    border-bottom: 1px solid #ddd;
+    padding-top:10px;
+    padding-bottom:10px;
+    text-align: center;
+}
+
 .id {
     border-bottom: 1px solid #ddd;
     padding-top:10px;
     padding-bottom:10px;
-    font-size: 95%;
+    font-size: .95em;
     white-space: nowrap;
 }
 
@@ -149,8 +166,9 @@ tr:not(:first-child):hover {
 
 .detail {
     font-family:'Consolas', monospace;
-    color:#666;
+    color:#888;
     padding-right:1.5em;
+    font-size: 1em;
 }
 
 /* Modal */
@@ -172,14 +190,14 @@ tr:not(:first-child):hover {
     padding:20px;
     border-bottom:1px #CCC solid;
     font-family:'Inter', sans-serif;
-    font-size:120%;
+    font-size:1.1em;
 }
 
 .modal .content {
     display:block;
     padding:20px;
     font-family:'Inter', sans-serif;
-    font-size:110%;
+    font-size:1em;
     color:#444;
     line-height:175%;
 }
@@ -190,7 +208,7 @@ tr:not(:first-child):hover {
     padding:0;
     text-decoration:none;
     font-family: 'Consolas', monospace;
-    font-size:100%;
+    font-size:1em;
 }
 
 .modal {
