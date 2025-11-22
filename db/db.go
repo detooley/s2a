@@ -83,10 +83,9 @@ func CreateIdManual() {
 }
 
 // Search the id manual table
-func SearchIdManual(idm structs.IdmPageData) []structs.IdManual {
-	var results []structs.IdManual
+func SearchIdManual(idm structs.IdmPageData) structs.IdmPageData {
 	if idm.Search == "" {
-		return results
+		return idm
 	}
 	conn := connectToDatabase()
 	defer conn.Close()
@@ -96,6 +95,10 @@ func SearchIdManual(idm structs.IdmPageData) []structs.IdManual {
 	sqlSort := parseOrderBy(idm.OrderBy)
 	sql := sqlStart + sqlSearch + sqlSort
 	fmt.Print(sql + "\n")
+	// set counter for numer of hits
+	hits := 0
+	// set start time for query
+	start := time.Now()
 	// execute sequential SQL commands
 	rows, err := conn.Query(sql)
 	if err != nil {
@@ -112,7 +115,8 @@ func SearchIdManual(idm structs.IdmPageData) []structs.IdManual {
 		var tm5 string
 		var begin_effective_date time.Time
 		var status string
-
+		// add a hit!
+		hits++
 		err := rows.Scan(&id,
 			&id_tx,
 			&class_id,
@@ -128,7 +132,7 @@ func SearchIdManual(idm structs.IdmPageData) []structs.IdManual {
 			fmt.Printf("Error scanning row: %s\n", err)
 			continue
 		}
-		results = append(results, structs.IdManual{
+		idm.Results = append(idm.Results, structs.IdManual{
 			Id:                 id,
 			IdTx:               id_tx,
 			ClassId:            class_id,
@@ -140,7 +144,11 @@ func SearchIdManual(idm structs.IdmPageData) []structs.IdManual {
 			Status:             status,
 		})
 	}
-	return results
+	elapsed := time.Since(start)
+	idm.Time = elapsed
+	idm.NumFound = hits
+	fmt.Printf("Query took %s and resulted in %d hits\n", idm.Time, idm.NumFound)
+	return idm
 }
 
 // Generic search function for the database
@@ -266,7 +274,7 @@ func populateIdManual(conn *sql.DB) {
 }
 
 func parseIdmSearch(search string) string {
-	paras := strings.Fields(search)
+	paras := extractSearchTerms(search)
 	var sql_search string
 	var sql_bit string
 	class := regexp.MustCompile(`\b(00[1-9]|0[1-3]\d|04[0-5])\b`)
@@ -318,6 +326,18 @@ func parseIdmSearch(search string) string {
 	sql_search = strings.TrimSuffix(sql_search, " AND ")
 	//fmt.Print(sql_search)
 	return sql_search
+}
+
+func extractSearchTerms(text string) []string {
+	// Matches anything within quotes
+	re := regexp.MustCompile(`"(.*?)"`)
+	quoted := re.FindAllStringSubmatch(text, -1)
+	remaining := re.ReplaceAllString(text, "")
+	searchTerms := strings.Fields(remaining)
+	for _, term := range quoted {
+		searchTerms = append(searchTerms, term[1])
+	}
+	return searchTerms
 }
 
 func parseOrderBy(orderBy structs.OrderBy) string {

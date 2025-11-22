@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Cites</title>
+        <title>cites</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
@@ -12,36 +12,57 @@
         </div>
         <div class="search-container">
             <form action="cites" class="search-form" method="get">
-                <input type="text" class="search-input" name="sns" placeholder="enter serial numbers of cites"/>
+                <input type="text" class="search-input" name="ids" placeholder="enter serial numbers or registration numbers of cites"/>
                 <input type="submit" class="search-button" value="compile"/>
             </form>
         </div>
         <div>
             <p>
-            Registration of the applied-for mark is refused because of a likelihood of confusion with the marks in U.S. Registration Nos.
-            {{ $e := len . }}
-            {{ $u := $e | dec | dec }}
-            {{ $p := $u | dec }}
-            {{ range $i, $e := . }}
-                {{ .Status.UsRegistrationNumber }}{{ if and (eq $u 0) (eq $i 0) }} and{{ else if eq $i $u }}, and{{ else if le $i $p }},{{ else }}.{{ end }}
-            {{ end }}
-            </p>
-            {{ range . }}
-                <p>
-                {{ .Status.MarkElement }},
-                Reg. No. 
-                {{ .Status.UsRegistrationNumber }},
-                for
-                {{ $e := len .GsList }}
+                <!-- Set a static variable of number of entries -->
+                {{ $t := len . }}
+                <!-- Set header for the summary of cites -->
+                {{ if gt $t 1 }}
+                Registration of the applied-for mark is refused because of a likelihood of confusion with the mark{{ if eq $t 2 }} in U.S. Registration No. {{ else }}s in U.S. Registration Nos. {{ end }}
+                {{ end }}
+                <!-- Set mutable variables of number of entries -->
+                {{ $e := len . }}
                 {{ $u := $e | dec | dec }}
                 {{ $p := $u | dec }}
-                {{ range $i, $e := .GsList }}
-                    "{{ brc .Description }}"
-                    in class 
-                    {{ slz .PrimeClassCode }}{{ if and (eq $u 0) (eq $i 0) }} and{{ else if eq $i $u }}, and{{ else if le $i $p }},{{ else }}.{{ end }}
+                <!-- Print all cites for summary -->
+                {{ range $i, $e := . }}
+                    {{ if eq $i 0 }}{{ else }}
+                        {{ .Status.UsRegistrationNumber }}{{ if and (eq $u 1) (eq $i 1) }} and{{ else if eq $i $u }}, and{{ else if le $i $p }},{{ else }}.{{ end }}
+                    {{ end }}
                 {{ end }}
             </p>
-        {{ end }}
+                <!-- Print applicant's mark and cited marks -->
+                {{ range $i, $e := . }}
+                    {{ if and (eq $t 2) (eq $i 1) }}{{ else }}<p>{{ end }}
+                    {{ if eq $i 0 }}
+                        <!-- Set header for applicant's mark -->
+                        Applicant applied to register 
+                        <!-- Set applicant's mark element -->
+                        {{ .Status.MarkElement }} 
+                    {{ else }}
+                        <!-- Set registered marks elements and registration numbers -->
+                        {{ .Status.MarkElement }},
+                        Reg. No. 
+                        {{ .Status.UsRegistrationNumber }},
+                    {{ end }}
+                        <!-- List goods and servies of applicant's mark and registered mark -->
+                        for
+                        {{ $e := len .GsList }}
+                        {{ $u := $e | dec | dec }}
+                        {{ $p := $u | dec }}
+                        {{ range $i, $e := .GsList }}
+                            "{{ brc .Description }}"
+                            in class 
+                            {{ slz .PrimeClassCode }}{{ if and (eq $u 0) (eq $i 0) }} and{{ else if eq $i $u }}, and{{ else if le $i $p }},{{ else }}.{{ end }}
+                        {{ end }}
+            </p>
+                <!-- Set header for cites -->
+                {{ if and (eq $i 0) (gt $t 1) }}<p>The registered mark{{ if eq $t 2 }} is {{ else }}s are:</p>{{ end }}{{ end }}
+            {{ end }}
         </div>
     </body>
 </html>

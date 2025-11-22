@@ -42,9 +42,9 @@ func GetGen(w http.ResponseWriter, r *http.Request) {
 	page := text.ExtractBetween(r.URL.String(), "/", "?")
 	fmt.Print("got /" + page + "\n")
 	// Extract serial numbers
-	sns := r.URL.Query().Get("sns")
+	ids := r.URL.Query().Get("ids")
 	// Query tsdr
-	files := tsdr.GetFiles(sns)
+	files := tsdr.GetFiles(ids)
 	//fmt.Print(files)
 	// Set template functions
 	funcMap := template.FuncMap{
@@ -117,9 +117,7 @@ func GetIdm(w http.ResponseWriter, r *http.Request) {
 		} // Unicode for 't' is 116
 	}
 	// Query database
-	results := db.SearchIdManual(idm)
-	//Add results to page data
-	idm.Results = results
+	idm = db.SearchIdManual(idm)
 	// Set template directory variables
 	tmplDir := "web/templs/"
 	tmplExt := ".html"

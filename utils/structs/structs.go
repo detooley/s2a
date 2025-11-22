@@ -31,6 +31,7 @@ type IdmPageData struct {
 	Search   string
 	OrderBy  OrderBy
 	NumFound int
+	Time     time.Duration
 	Options  Options
 	Results  []IdManual
 }
@@ -49,4 +50,52 @@ type Options struct {
 type OrderBy struct {
 	Element   string
 	Direction string
+}
+
+// Define the structure of the TSDR JSON file
+type File struct {
+	TransactionList []TransactionList `json:"transactionList"`
+	Oversized       bool              `json:"oversized"`
+	Size            int               `json:"size"`
+}
+type TransactionList struct {
+	Trademarks []Trademarks `json:"trademarks"`
+	SearchId   string       `json:"searchId"`
+}
+type Trademarks struct {
+	Status  Status   `json:"status"`
+	Parties Parties  `json:"parties"`
+	GsList  []GsList `json:"gsList"`
+}
+type Status struct {
+	Staff                Staff  `json:"staff"`
+	SerialNumber         int    `json:"serialNumber"`
+	UsRegistrationNumber string `json:"usRegistrationNumber"`
+	MarkElement          string `json:"markElement"`
+}
+type Staff struct {
+	Examiner Examiner `json:"examiner"`
+}
+type Examiner struct {
+	Name string `json:"name"`
+}
+type Parties struct {
+	OwnerGroups OwnerGroups `json:"ownerGroups"`
+}
+type OwnerGroups struct {
+	Ten []Ten `json:"10"`
+}
+type Ten struct {
+	Citizenship Citizenship `json:"citizenship"`
+}
+type Citizenship struct {
+	StateCountry StateCountry `json:"stateCountry"`
+}
+type StateCountry struct {
+	Code string `json:"code"`
+	Name string `json:"name"`
+}
+type GsList struct {
+	Description    string `json:"description"`
+	PrimeClassCode string `json:"primeClassCode"`
 }

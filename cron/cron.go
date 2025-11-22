@@ -12,7 +12,7 @@ func main() {
 	c := cron.New()
 
 	// Add a job that runs every Thursday at 3:00 AM to update Id Manual
-	_, err := c.AddFunc("0 3 * * 4", func() {
+	_, err := c.AddFunc("0 6 * * 4", func() {
 		db.CreateIdManual()
 		log.Println("Id Manual Created at:", time.Now().Format(time.RFC3339))
 	})

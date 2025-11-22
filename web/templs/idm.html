@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>IDM</title>
+        <title>idm</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
@@ -32,6 +32,8 @@
                     </tr>
                 </thead>
             {{ $Options := .Options }}
+            {{ $Time := .Time }}
+            {{ $NumFound := .NumFound }}
             {{ range .Results }}
                 <tbody>
                     <tr>
@@ -44,24 +46,25 @@
                         {{ if $Options.ShowVer }}<td class="id">{{ .Version }}</td>{{ end }}
                         <td class="status">{{ if eq .Notes "" }}<a href='#{{ .IdTx }}'>[info]</a>{{ else }}<a class="darker" href='#{{ .IdTx }}'>[note]</a>{{ end }}</td>
                     </tr>
-                </tbody> 
-                <div class='modal' id='{{ .IdTx }}'>
-                    <div class='box'>
-                        <a class='close' href='##'>[X]</a>
-                        <p class='modtitle'>{{ .DescriptionTx }}</p>
-                        <div class='content'>ID:
-                            <span class='detail'>{{ .IdTx }}</span>Class:
-                            <span class='detail'>{{ .ClassId }}</span>Status:
-                            <span class='detail'>{{ .Status }}</span>Date:
-                            <span class='detail'>{{ printf "%02d" .BeginEffectiveDate.Month }}-{{ printf "%02d" .BeginEffectiveDate.Day }}-{{ .BeginEffectiveDate.Year }}</span>Version:
-                            <span class='detail'>{{ .Version }}</span>TM5:
-                            <span class='detail'>{{ .Tm5 }}</span>
-                            <p><span class='detail'>{{ .Notes }}</span></p>
+                    <div class='modal' id='{{ .IdTx }}'>
+                        <div class='box'>
+                            <a class='close' href='##'>[X]</a>
+                            <p class='modtitle'>{{ .DescriptionTx }}</p>
+                            <div class='content'>ID:
+                                <span class='detail'>{{ .IdTx }}</span>Class:
+                                <span class='detail'>{{ .ClassId }}</span>Status:
+                                <span class='detail'>{{ .Status }}</span>Date:
+                                <span class='detail'>{{ printf "%02d" .BeginEffectiveDate.Month }}-{{ printf "%02d" .BeginEffectiveDate.Day }}-{{ .BeginEffectiveDate.Year }}</span>Version:
+                                <span class='detail'>{{ .Version }}</span>TM5:
+                                <span class='detail'>{{ .Tm5 }}</span>
+                                <p><span class='detail'>{{ .Notes }}</span></p>
+                            </div>
                         </div>
                     </div>
-                </div>
             {{ end }}
+                </tbody>
             </table>
+            <div class="resultsdata">Query took {{ $Time }} and resulted in {{ $NumFound }} hits! Keep up the good work.</div>
         </div>
     </body>
 </html> 

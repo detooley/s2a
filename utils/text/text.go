@@ -27,7 +27,7 @@ func RemoveBrackets(text string) string {
 
 func SqlSanitize(text string) string {
 	// Remove single quotes
-	text = regexp.MustCompile(`'`).ReplaceAllString(text, "")
+	text = regexp.MustCompile(`'`).ReplaceAllString(text, "''")
 	// Remove double quotes
 	text = regexp.MustCompile(`"`).ReplaceAllString(text, "")
 	// Remove backslashes
@@ -37,7 +37,20 @@ func SqlSanitize(text string) string {
 	return text
 }
 
+func SearchSanitize(text string) string {
+	// Remove single quotes
+	text = regexp.MustCompile(`'`).ReplaceAllString(text, "")
+	// Remove double quotes
+	// text = regexp.MustCompile(`"`).ReplaceAllString(text, "")
+	// Remove backslashes
+	text = regexp.MustCompile(`\\`).ReplaceAllString(text, "")
+	// Remove semicolons
+	text = regexp.MustCompile(`;`).ReplaceAllString(text, "")
+	return text
+}
+
 func StripHTMLTags(htmlString string) string {
-	re := regexp.MustCompile(`<[^>]*>`) // Matches any HTML tag
+	// Matches any HTML tag
+	re := regexp.MustCompile(`<[^>]*>`)
 	return re.ReplaceAllString(htmlString, "")
 }

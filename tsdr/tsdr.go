@@ -9,17 +9,17 @@ import (
 	"regexp"
 	"strings"
 
-	ch "s2a.app/utils/chunk"
+	"s2a.app/utils/structs"
 )
 
 // Retrieve file from API and return Go variable
-func GetFiles(sns string) []trademarks {
-	snsp := parseInput(sns)
+func GetFiles(ids string) []structs.Trademarks {
+	idsp := parseInput(ids)
 	// Query the database
-	var files []trademarks
-	for _, snsc := range snsp {
-		jsonData := query(snsc)
-		fmt.Printf("%s \n\n", snsc)
+	var files []structs.Trademarks
+	for _, id := range idsp {
+		jsonData := query(id)
+		fmt.Printf("%s \n\n", id)
 		// Extract JSON to a structure
 		fileInfo, err := extract(jsonData)
 		if err != nil {
@@ -36,8 +36,14 @@ func GetFiles(sns string) []trademarks {
 }
 
 // Query TSDR
-func query(sns string) string {
-	url := "https://tsdrapi.uspto.gov/ts/cd/caseMultiStatus/sn?ids=" + sns
+func query(id string) string {
+	var sorr string
+	if len(id) == 8 {
+		sorr = "sn"
+	} else {
+		sorr = "rn"
+	}
+	url := "https://tsdrapi.uspto.gov/ts/cd/caseMultiStatus/" + sorr + "?ids=" + id
 	// Create a new HTTP client
 	client := &http.Client{}
 	// Create a new request
@@ -66,9 +72,9 @@ func query(sns string) string {
 }
 
 // Unmarshall the JSON file
-func extract(jsonData string) (file, error) {
+func extract(jsonData string) (structs.File, error) {
 	//var data map[string]interface{}
-	var fileInfo file
+	var fileInfo structs.File
 	err := json.Unmarshal([]byte(jsonData), &fileInfo)
 	if err != nil {
 		fmt.Printf("could not unmarshal json: %s\n", err)
@@ -78,61 +84,13 @@ func extract(jsonData string) (file, error) {
 }
 
 // Parse user input
-func parseInput(sns string) []string {
-	sns = strings.TrimSpace(sns)
+func parseInput(ids string) []string {
+	ids = strings.TrimSpace(ids)
 	res := regexp.MustCompile(`,|\s+`)
-	sns = res.ReplaceAllString(sns, " ")
-	sns = res.ReplaceAllString(sns, ",")
-	sn := strings.Split(sns, ",")
-	chunk := ch.Chunk(sn, 25)
+	ids = res.ReplaceAllString(ids, " ")
+	ids = res.ReplaceAllString(ids, ",")
+	idList := strings.Split(ids, ",")
+	//chunk := ch.Chunk(idList, 25)
 	//fmt.Print(chunk)
-	return chunk
-}
-
-// Define the structure of the JSON file
-type file struct {
-	TransactionList []transactionList `json:"transactionList"`
-	Oversized       bool              `json:"oversized"`
-	Size            int               `json:"size"`
-}
-type transactionList struct {
-	Trademarks []trademarks `json:"trademarks"`
-	SearchId   string       `json:"searchId"`
-}
-type trademarks struct {
-	Status  status   `json:"status"`
-	Parties parties  `json:"parties"`
-	GsList  []gsList `json:"gsList"`
-}
-type status struct {
-	Staff                staff  `json:"staff"`
-	SerialNumber         int    `json:"serialNumber"`
-	UsRegistrationNumber string `json:"usRegistrationNumber"`
-	MarkElement          string `json:"markElement"`
-}
-type staff struct {
-	Examiner examiner `json:"examiner"`
-}
-type examiner struct {
-	Name string `json:"name"`
-}
-type parties struct {
-	OwnerGroups ownerGroups `json:"ownerGroups"`
-}
-type ownerGroups struct {
-	Ten []ten `json:"10"`
-}
-type ten struct {
-	Citizenship citizenship `json:"citizenship"`
-}
-type citizenship struct {
-	StateCountry stateCountry `json:"stateCountry"`
-}
-type stateCountry struct {
-	Code string `json:"code"`
-	Name string `json:"name"`
-}
-type gsList struct {
-	Description    string `json:"description"`
-	PrimeClassCode string `json:"primeClassCode"`
+	return idList
 }
