@@ -28,40 +28,10 @@ func GetRoot(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.New(page + tmplExt).ParseFiles(tmplDir + page + tmplExt)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 	// Execute template
 	err = tmpl.Execute(w, page)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		//	panic(err)
-	}
-}
-
-// Generic
-func GetGen(w http.ResponseWriter, r *http.Request) {
-	page := text.ExtractBetween(r.URL.String(), "/", "?")
-	fmt.Print("got /" + page + "\n")
-	// Extract serial numbers
-	ids := r.URL.Query().Get("ids")
-	// Query tsdr
-	files := tsdr.GetFiles(ids)
-	//fmt.Print(files)
-	// Set template functions
-	funcMap := template.FuncMap{
-		"dec": func(i int) int { return i - 1 },
-		"slz": func(i string) string { return strings.TrimLeft(i, "0") },
-		"brc": text.RemoveBrackets,
-	}
-	// Set template directory variables
-	tmplDir := "web/templs/"
-	tmplExt := ".html"
-	// Parse template
-	tmpl, err := template.New(page + tmplExt).Funcs(funcMap).ParseFiles(tmplDir + page + tmplExt)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-	// Execute template
-	err = tmpl.Execute(w, files)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		//	panic(err)
@@ -79,9 +49,75 @@ func GetDb(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.New("db" + tmplExt).ParseFiles(tmplDir + "db" + tmplExt)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 	// Execute template
 	err = tmpl.Execute(w, nil)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		//	panic(err)
+	}
+}
+
+// Search TSDR
+func GetTsdr(w http.ResponseWriter, r *http.Request) {
+	page := text.ExtractBetween(r.URL.String(), "/", "?")
+	fmt.Print("got /" + page + "\n")
+	var tarp structs.TsdrPageData
+	// Extract serial numbers
+	tarp.Search = r.URL.Query().Get("ids")
+	// Query tsdr
+	files := tsdr.GetFiles(tarp)
+	//fmt.Print(files)
+	// Set template functions
+	funcMap := template.FuncMap{
+		"dec": func(i int) int { return i - 1 },
+		"slz": func(i string) string { return strings.TrimLeft(i, "0") },
+		"brc": text.RemoveBrackets,
+	}
+	// Set template directory variables
+	tmplDir := "web/templs/"
+	tmplExt := ".html"
+	// Parse template
+	tmpl, err := template.New(page + tmplExt).Funcs(funcMap).ParseFiles(tmplDir + page + tmplExt)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	// Execute template
+	err = tmpl.Execute(w, files)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		//	panic(err)
+	}
+}
+
+// Search Cites
+func GetCites(w http.ResponseWriter, r *http.Request) {
+	fmt.Print("got /cites\n")
+	var tarp structs.TsdrPageData
+	// Extract serial numbers
+	tarp.Search = r.URL.Query().Get("ids")
+	// Query tsdr
+	tarp.Files = tsdr.GetFiles(tarp)
+	//fmt.Print(files)
+	// Set template functions
+	funcMap := template.FuncMap{
+		"dec": func(i int) int { return i - 1 },
+		"slz": func(i string) string { return strings.TrimLeft(i, "0") },
+		"brc": text.RemoveBrackets,
+	}
+	// Set template directory variables
+	tmplDir := "web/templs/"
+	tmplExt := ".html"
+	// Parse template
+	tmpl, err := template.New("cites" + tmplExt).Funcs(funcMap).ParseFiles(tmplDir + "cites" + tmplExt)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	// Execute template
+	err = tmpl.Execute(w, tarp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		//	panic(err)
@@ -125,6 +161,7 @@ func GetIdm(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.New("idm" + tmplExt).ParseFiles(tmplDir + "idm" + tmplExt)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 	// Execute template
 	err = tmpl.Execute(w, idm)

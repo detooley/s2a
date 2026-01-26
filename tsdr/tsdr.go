@@ -13,10 +13,10 @@ import (
 )
 
 // Retrieve file from API and return Go variable
-func GetFiles(ids string) []structs.Trademarks {
-	idsp := parseInput(ids)
-	// Query the database
+func GetFiles(tarp structs.TsdrPageData) []structs.Trademarks {
 	var files []structs.Trademarks
+	idsp := parseInput(tarp.Search)
+	// Query the database
 	for _, id := range idsp {
 		jsonData := query(id)
 		fmt.Printf("%s \n\n", id)

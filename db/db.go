@@ -277,7 +277,7 @@ func parseIdmSearch(search string) string {
 	paras := extractSearchTerms(search)
 	var sql_search string
 	var sql_bit string
-	class := regexp.MustCompile(`\b(00[1-9]|0[1-3]\d|04[0-5])\b`)
+	class := regexp.MustCompile(`\b(00[0-9]|0[1-3]\d|04[0-5])\b`)
 	punc := regexp.MustCompile(`[{}()\[\],-.:]`)
 	// Parse Full Text Search
 	if strings.Contains(search, "/f") {

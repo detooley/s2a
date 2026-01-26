@@ -26,7 +26,7 @@ type IdManual struct {
 	Status             string    `db:"status"`
 }
 
-// Define the structure of search results
+// Define the structure of IDM page data
 type IdmPageData struct {
 	Search   string
 	OrderBy  OrderBy
@@ -36,7 +36,7 @@ type IdmPageData struct {
 	Results  []IdManual
 }
 
-// Define the structure of IDM page data
+// Define the structure of IDM options data
 type Options struct {
 	ShowId     string
 	ShowStatus string
@@ -98,4 +98,10 @@ type StateCountry struct {
 type GsList struct {
 	Description    string `json:"description"`
 	PrimeClassCode string `json:"primeClassCode"`
+}
+
+// Define the structure of the TSDR page data
+type TsdrPageData struct {
+	Search string
+	Files  []Trademarks
 }

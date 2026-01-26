@@ -16,11 +16,14 @@ func main() {
 	//cidm.StartIdmCron()
 	// Serve static files
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("web/css"))))
+	http.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "web/favicon/favicon.ico")
+	})
 	// Serve webpages
 	http.HandleFunc("/", web.GetRoot)
-	http.HandleFunc("/cites", web.GetGen)
-	http.HandleFunc("/marks", web.GetGen)
-	http.HandleFunc("/reds", web.GetGen)
+	http.HandleFunc("/cites", web.GetCites)
+	http.HandleFunc("/marks", web.GetTsdr)
+	http.HandleFunc("/reds", web.GetTsdr)
 	http.HandleFunc("/idm", web.GetIdm)
 	http.HandleFunc("/db", web.GetDb)
 
