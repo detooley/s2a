@@ -1,0 +1,55 @@
+{
+    "docs": [
+        {
+            "notes": "",
+            "class_id": "006",
+            "goods_services": "GOODS",
+            "description": "<em style=\"background-color: yellow;\">Crampons<\/em> of metal",
+            "description_tx": "Crampons of metal",
+            "version": "12-2023",
+            "description_relevance": "Crampons of metal",
+            "long_class": "Common metals and their alloys, ores;  metal materials for building and construction;  transportable buildings of metal;  non-electric cables and wires of common metal;  small items of metal hardware;  metal containers for storage or transport;  safes",
+            "id": "89846",
+            "TM5": "N",
+            "class": "Metal goods",
+            "begin_effective_date": "Thu Aug 10 00:00:00 UTC 2023",
+            "id_tx": "006-2068",
+            "status": "A"
+        },
+        {
+            "notes": "",
+            "class_id": "006",
+            "goods_services": "GOODS",
+            "description": "<em style=\"background-color: yellow;\">Crampons<\/em> for climbing",
+            "description_tx": "Crampons for climbing",
+            "version": "07-1997",
+            "description_relevance": "Crampons for climbing",
+            "long_class": "Common metals and their alloys; metal building materials; transportable buildings of metal; materials of metal for railway tracks; non-electric cables and wires of common metal; ironmongery, small items of metal hardware; pipes and tubes of metal; safes; goods of common metal not included in other classes; ores",
+            "id": "26775",
+            "TM5": "Y",
+            "class": "Metal goods",
+            "begin_effective_date": "Fri Sep 01 00:00:00 UTC 1995",
+            "id_tx": "006-734",
+            "status": "A"
+        },
+        {
+            "notes": "",
+            "class_id": "006",
+            "goods_services": "GOODS",
+            "description": "<em style=\"background-color: yellow;\">Crampons<\/em> [climbing irons]",
+            "description_tx": "Crampons [climbing irons]",
+            "version": "07-1997",
+            "description_relevance": "Crampons [climbing irons]",
+            "long_class": "Common metals and their alloys; metal building materials; transportable buildings of metal; materials of metal for railway tracks; non-electric cables and wires of common metal; ironmongery, small items of metal hardware; pipes and tubes of metal; safes; goods of common metal not included in other classes; ores",
+            "id": "14341",
+            "TM5": "Y",
+            "class": "Metal goods",
+            "begin_effective_date": "Sun Jan 01 00:00:00 UTC 1995",
+            "id_tx": "006-447",
+            "status": "A"
+        }
+    ],
+    "numFound": 3,
+    "start": 0,
+    "searchURL": "https://idm-tmng.uspto.gov/id-master-list-public.html"
+}

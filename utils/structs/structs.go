@@ -32,12 +32,12 @@ type IdmPageData struct {
 	OrderBy  OrderBy
 	NumFound int
 	Time     time.Duration
-	Options  Options
+	Options  IdmOptions
 	Results  []IdManual
 }
 
 // Define the structure of IDM options data
-type Options struct {
+type IdmOptions struct {
 	ShowId     string
 	ShowStatus string
 	ShowDate   string
@@ -71,6 +71,7 @@ type Status struct {
 	Staff                Staff  `json:"staff"`
 	SerialNumber         int    `json:"serialNumber"`
 	UsRegistrationNumber string `json:"usRegistrationNumber"`
+	MarkDrawingCode      string `json:"markDrawingCd"`
 	MarkElement          string `json:"markElement"`
 }
 type Staff struct {
@@ -102,6 +103,14 @@ type GsList struct {
 
 // Define the structure of the TSDR page data
 type TsdrPageData struct {
-	Search string
-	Files  []Trademarks
+	Search  string
+	Options TsdrOptions
+	Files   []Trademarks
+}
+
+type TsdrOptions struct {
+	ClassCase     string
+	International string
+	Link          string
+	Submitted     string
 }

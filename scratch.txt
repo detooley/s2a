@@ -26,3 +26,23 @@ backupTable := "CREATE TABLE pulls" +
 		log.Fatalf("Error creating new table: %v", err)
 	}
 	fmt.Println("New Table created successfully.")
+
+
+
+
+ <!-- Set mark drawing code variables -->
+            {{ if or .Status.MarkDrawingCode "1" "4"}}
+            {{ $mdc := "in standard character format" }}
+            {{ else if eq .Status.MarkDrawingCode "5" }}
+            {{ $mdc := "in stylized format" }}
+            {{ else if eq .Status.MarkDrawingCode "2" }}
+            {{ $mdc := "a design mark" }}
+            {{ else if eq .Status.MarkDrawingCode "3" }}
+            {{ $mdc := "and design" }}
+            {{ else }}
+            {{ $mdc := "" }}
+            {{ end }}
+
+
+{{ if eq $lnk "on" }}
+        <a href="{{ $urlf }}{{ .Status.UsRegistrationNumber }}{{ $urlr }}">{{ .Status.UsRegistrationNumber }}</a>,

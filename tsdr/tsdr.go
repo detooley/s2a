@@ -52,7 +52,7 @@ func query(id string) string {
 		fmt.Println("Error creating request:", err)
 	}
 	// Add headers to the request
-	req.Header.Add("USPTO-API-KEY", "j37IXbK5pGQmOIX08rTQoP8lSxwFedQP")
+	req.Header.Add("USPTO-API-KEY", "and82iH2J5p3O1W3GxltGJb2CmMDrsHh")
 	// Send the request
 	resp, err := client.Do(req)
 	if err != nil {

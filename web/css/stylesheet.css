@@ -23,71 +23,82 @@ div {
 /* Links */
 
 a {
-    color:#aaa;
-    text-decoration:none;
+    color: #aaa;
+    text-decoration: none;
 }
 
 a.darker {
-    color:#444;
-    text-decoration:none;
+    color: #444;
+    text-decoration: none;
 }
 
 a:hover {
-    color:#000;
+    color: #000;
 }
 
 thead a {
-    color:#000;
-    text-decoration:none;
+    color: #000;
+    text-decoration: none;
 }
 
 thead a:hover {
-    color:#000;
+    color: #000;
     background-color: #eee;
 }
 
 /* Search Bar */
 
 ::placeholder {
-  color: #ccc;
-  opacity: 1; /* Ensures full opacity for placeholder text */
+    color: #ccc;
+    opacity: 1;
+    /* Ensures full opacity for placeholder text */
 }
 
 .search-container {
-  display: flex; /* Enables Flexbox for alignment */
-  align-items: center; /* Vertically centers items */
-  width: 100%; /* Or a specific fixed width for the container */
-  overflow: hidden; /* Ensures content stays within bounds */
+    display: flex;
+    /* Enables Flexbox for alignment */
+    align-items: center;
+    /* Vertically centers items */
+    width: 100%;
+    /* Or a specific fixed width for the container */
+    overflow: hidden;
+    /* Ensures content stays within bounds */
 }
 
 .search-form {
-  display: flex; /* Enables Flexbox for alignment */
-  width: 100%; /* Makes the form take full width of the container */
+    display: flex;
+    /* Enables Flexbox for alignment */
+    width: 100%;
+    /* Makes the form take full width of the container */
 }
 
 .search-input {
-  flex-grow: 1; /* Allows the input field to grow and fill available space */
-  padding: 10px;
-  border: 1px solid #888;
-  outline: none; /* Removes default outline on focus */
-  font-size: 1em;
+    flex-grow: 1;
+    /* Allows the input field to grow and fill available space */
+    padding: 10px;
+    border: 1px solid #888;
+    outline: none;
+    /* Removes default outline on focus */
+    font-size: 1em;
 }
 
 .search-button {
-  flex-shrink: 0; /* Prevents the button from shrinking */
-  width: 80px; /* Fixed width for the button */
-  padding: 10px;
-  margin-left: 10px;
-  background-color: #eee;
-  color: #404040;
-  border: 1px solid #888;
-  border-radius: 0 0 0 0;
-  cursor: pointer;
-  font-size: .9em;
+    flex-shrink: 0;
+    /* Prevents the button from shrinking */
+    width: 80px;
+    /* Fixed width for the button */
+    padding: 10px;
+    margin-left: 10px;
+    background-color: #eee;
+    color: #404040;
+    border: 1px solid #888;
+    border-radius: 0 0 0 0;
+    cursor: pointer;
+    font-size: .9em;
 }
 
 .search-button:hover {
-  background-color: #ddd;
+    background-color: #ddd;
 }
 
 /* Default table style */
@@ -122,53 +133,53 @@ tbody tr:hover {
 
 .idm {
     border-bottom: 1px solid #ddd;
-    padding-top:10px;
-    padding-bottom:10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .ver {
     border-bottom: 1px solid #ddd;
-    padding-top:10px;
-    padding-bottom:10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     text-align: center;
 }
 
 .id {
     border-bottom: 1px solid #ddd;
-    padding-top:10px;
-    padding-bottom:10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-size: .95em;
     white-space: nowrap;
 }
 
 .description {
-    width:100%;
+    width: 100%;
     border-bottom: 1px solid #ddd;
-    padding-top:10px;
-    padding-bottom:10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .delete {
-    width:100%;
+    width: 100%;
     border-bottom: 1px solid #ddd;
-    padding-top:10px;
-    padding-bottom:10px; 
+    padding-top: 10px;
+    padding-bottom: 10px;
     text-decoration: line-through;
-    color:#800517;
+    color: #800517;
 }
 
 .status {
     border-bottom: 1px solid #ddd;
-    padding-top:10px;
-    padding-bottom:10px; 
-    font-family:'Consolas', monospace;
-    text-align: center;  
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: 'Consolas', monospace;
+    text-align: center;
 }
 
 .detail {
-    font-family:'Consolas', monospace;
-    color:#888;
-    padding-right:1.5em;
+    font-family: 'Consolas', monospace;
+    color: #888;
+    padding-right: 1.5em;
     font-size: 1.1em;
 }
 
@@ -186,54 +197,54 @@ tbody tr:hover {
     width: -webkit-min-content;
     width: -moz-min-content;
     width: min-content;
-    min-width:100%;
-    margin:0;
-    padding:10px;
-    background-color:#FFF;
-    box-shadow:5px 10px 50px 10px #CCC;
-    outline:9999px solid rgba(0,0,0,0.2);
+    min-width: 100%;
+    margin: 0;
+    padding: 10px;
+    background-color: #FFF;
+    box-shadow: 5px 10px 50px 10px #CCC;
+    outline: 9999px solid rgba(0, 0, 0, 0.2);
 }
 
 .modal .modtitle {
-    margin:0;
-    padding:20px;
-    border-bottom:1px #CCC solid;
-    font-family:'Inter', sans-serif;
-    font-size:1.1em;
+    margin: 0;
+    padding: 20px;
+    border-bottom: 1px #CCC solid;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1em;
 }
 
 .modal .content {
-    display:block;
-    padding:20px;
-    font-family:'Inter', sans-serif;
-    font-size:1em;
-    color:#444;
-    line-height:175%;
+    display: block;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1em;
+    color: #444;
+    line-height: 175%;
 }
 
 .modal .close {
-    float:right;
-    display:block;
-    padding:0;
-    text-decoration:none;
+    float: right;
+    display: block;
+    padding: 0;
+    text-decoration: none;
     font-family: 'Consolas', monospace;
-    font-size:1em;
+    font-size: 1em;
 }
 
 .modal {
     /** Hide the modal */
-    display:none;
+    display: none;
     /** Modal styling */
-    position:fixed;
-    width:50%;
-    max-height:90%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
+    position: fixed;
+    width: 50%;
+    max-height: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .modal:target {
     /** Show lightbox */
-    display:block;
-    outline:none;
+    display: block;
+    outline: none;
 }

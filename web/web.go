@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	"strings"
+	"unicode"
 
 	"s2a.app/db"
 	"s2a.app/tsdr"
@@ -98,6 +99,20 @@ func GetCites(w http.ResponseWriter, r *http.Request) {
 	var tarp structs.TsdrPageData
 	// Extract serial numbers
 	tarp.Search = r.URL.Query().Get("ids")
+	// Extract options
+	options := r.URL.Query().Get("options")
+	tarp.Options.Submitted = options
+	for _, option := range options {
+		if option == 99 {
+			tarp.Options.ClassCase = "on"
+		} // Unicode for 'c' is 99
+		if option == 105 {
+			tarp.Options.International = "on"
+		} // Unicode for 'i' is 105
+		if option == 108 {
+			tarp.Options.Link = "on"
+		} // Unicode for 'l' is 108
+	}
 	// Query tsdr
 	tarp.Files = tsdr.GetFiles(tarp)
 	//fmt.Print(files)
@@ -129,7 +144,7 @@ func GetIdm(w http.ResponseWriter, r *http.Request) {
 	fmt.Print("got /idm\n")
 	var idm structs.IdmPageData
 	// Extract search elements
-	idm.Search = r.URL.Query().Get("search")
+	idm.Search = strings.TrimLeftFunc(r.URL.Query().Get("search"), unicode.IsSpace)
 	idm.OrderBy.Element = r.URL.Query().Get("orderby")
 	idm.OrderBy.Direction = r.URL.Query().Get("direction")
 	// Extract Options

@@ -224,45 +224,46 @@ func populateIdManual(conn *sql.DB) {
 		case cl == "48":
 			cl = "B"
 		}
-		results := idm.GetEntries("class-num=" + cl)
-		x, err := strconv.Atoi(fmt.Sprint(results["numFound"]))
-		if err != nil {
-			fmt.Println("Error converting numFound to int:", err)
+		results := idm.GetEntries("search-term=*&rows=20000&class-num=" + cl)
+		docs, ok := results["docs"].([]any)
+		if !ok {
+			fmt.Printf("Error: 'docs' is not a slice for class %s\n", cl)
+			continue
 		}
-		// poorly formed JSON made me do this
-		for i := 1; i < x+1; i++ {
-			// conver the int to string
-			ti := strconv.Itoa(i)
-			// build the variables for the SQL statement
-			id := results["docs"].(map[string]any)[ti].(map[string]any)["id"]
-			id_tx := results["docs"].(map[string]any)[ti].(map[string]any)["id_tx"]
-			class_id := results["docs"].(map[string]any)[ti].(map[string]any)["class_id"]
-			// sanatize the description
-			description_tx := text.SqlSanitize(fmt.Sprint(results["docs"].(map[string]any)[ti].(map[string]any)["description_tx"]))
-			notes, okay := results["docs"].(map[string]any)[ti].(map[string]any)["notes"]
-			// add a empty string if notes is missing or sanitize it if its not
-			if !okay {
+		for _, itemRaw := range docs {
+			doc, ok := itemRaw.(map[string]any)
+			if !ok {
+				continue
+			}
+			id := fmt.Sprint(doc["id"])
+			id_tx := fmt.Sprint(doc["id_tx"])
+			class_id := fmt.Sprint(doc["class_id"])
+			// Check for 'description_tx' key with fallback to 'description'
+			descVal, exists := doc["description_tx"]
+			if !exists {
+				descVal = doc["description"]
+			}
+			description_tx := text.SqlSanitize(fmt.Sprint(descVal))
+			notesVal, okay := doc["notes"]
+			var notes string
+			if !okay || notesVal == nil {
 				notes = ""
 			} else {
-				notes = text.StripHTMLTags(text.SqlSanitize(fmt.Sprint(notes)))
+				notes = text.StripHTMLTags(text.SqlSanitize(fmt.Sprint(notesVal)))
 			}
-			version := results["docs"].(map[string]any)[ti].(map[string]any)["version"]
-			tm5 := results["docs"].(map[string]any)[ti].(map[string]any)["TM5"]
-			begin_effective_date := (results["docs"].(map[string]any)[strconv.Itoa(i)].(map[string]any)["begin_effective_date"])
-			status := (results["docs"].(map[string]any)[strconv.Itoa(i)].(map[string]any)["status"])
-			// build the SQL statement
-			populateIds := fmt.Sprintf("INSERT INTO id_manual (id, id_tx, class_id, description_tx, notes, version, tm5, begin_effective_date, status) "+
-				"VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
-				id, id_tx, class_id, description_tx, notes, version, tm5, begin_effective_date, status,
-			)
-			// fmt.Print(description_tx)
-			// insert the entries and handle errors
-			_, err := conn.Exec(populateIds)
+			version := fmt.Sprint(doc["version"])
+			tm5 := fmt.Sprint(doc["TM5"])
+			begin_effective_date := fmt.Sprint(doc["begin_effective_date"])
+			status := fmt.Sprint(doc["status"])
+			query := `INSERT INTO id_manual (id, id_tx, class_id, description_tx, notes, version, tm5, begin_effective_date, status)
+				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`
+			_, err := conn.Exec(query, id, id_tx, class_id, description_tx, notes, version, tm5, begin_effective_date, status)
 			if err != nil {
 				fmt.Printf("Error inserting '%s': %s\n", id_tx, err)
 			}
 		}
-		fmt.Print("Class " + cl + " Complete\n")
+		fmt.Printf("Class %s Complete (%d entries)\n", cl, len(docs))
+		time.Sleep(200 * time.Millisecond)
 	}
 	createSearchVector := "ALTER TABLE id_manual ADD COLUMN search_vector tsvector GENERATED ALWAYS AS (to_tsvector('english', coalesce(description_tx, '') || ' ' || coalesce(notes, ''))) STORED;"
 	createFullTextIndex := "CREATE INDEX idx_search_vector ON id_manual USING GIN (search_vector);"
@@ -278,7 +279,7 @@ func parseIdmSearch(search string) string {
 	var sql_search string
 	var sql_bit string
 	class := regexp.MustCompile(`\b(00[0-9]|0[1-3]\d|04[0-5])\b`)
-	punc := regexp.MustCompile(`[{}()\[\],-.:]`)
+	punc := regexp.MustCompile(`[{}()\[\],-.:']`)
 	// Parse Full Text Search
 	if strings.Contains(search, "/f") {
 		search = strings.ReplaceAll(search, "/f", "")
@@ -292,6 +293,8 @@ func parseIdmSearch(search string) string {
 			// Check if search is a class id
 			if class.MatchString(para) {
 				sql_bit = "class_id ILIKE '" + para + "'"
+			} else if para == "" {
+				sql_bit = "class_id ILIKE ''"
 				// Assume search of description
 			} else {
 				runes := []rune(para)
